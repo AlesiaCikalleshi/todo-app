@@ -1,4 +1,4 @@
-export default function ToDoList({tasks}) {
+export default function ToDoList({tasks, dispatch}) {
     return (
         <>
             {tasks.map(task => 
@@ -6,9 +6,19 @@ export default function ToDoList({tasks}) {
                     <input type="checkbox" checked={task.completed}/>
                     {task.text}
 
-                    <button>
+                    <button style={{marginLeft: 8}}>
+                        Edit 
+                    </button>
+
+                    <button style={{marginLeft: 8}} 
+                    onClick={ () => 
+                        dispatch({
+                            type:'DELETE_TODO', taskId: task.id
+                        })
+                    }>
                         Delete
                     </button>
+
                 </li>
             )
             

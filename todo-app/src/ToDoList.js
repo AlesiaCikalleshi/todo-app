@@ -3,10 +3,21 @@ export default function ToDoList({tasks, dispatch}) {
         <>
             {tasks.map(task => 
                 <li key={task.id}>
-                    <input type="checkbox" checked={task.completed}/>
+                    <input onChange={ () =>
+                        dispatch({
+                            type:'MARK_TODO', task: {...task, completed: !task.completed}
+                        })
+                    }
+                     type="checkbox" checked={task.completed}/>
                     {task.text}
 
-                    <button style={{marginLeft: 8}}>
+                    <button style={{marginLeft: 8}}
+                    onClick={ () => 
+                        dispatch({
+                            type:'UPDATE_TODO',
+                            task: {...task, text: task.text}
+                        })
+                    }>
                         Edit 
                     </button>
 

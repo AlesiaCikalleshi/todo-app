@@ -12,6 +12,7 @@ function tasksReducer(tasks, action) {
           id: id++,
           text: action.text,
           completed: false,
+          visible: false
         }
       ];
     case 'MARK_TODO':
@@ -22,10 +23,18 @@ function tasksReducer(tasks, action) {
           return t;
         }
       });
-      case 'UPDATE_TODO':
+      case 'SAVE_TODO':
         return tasks.map(t => {
           if (t.id === action.task.id){
             return action.task
+          }else {
+            return t;
+          }
+        });
+      case 'UPDATE_TODO':
+        return tasks.map(t => {
+          if (t.id === action.task.id){
+            return {...t, visible: !t.visible}
           }else {
             return t;
           }
@@ -63,16 +72,19 @@ const initialData = [
   {
     "id": 1,
     "text": "delectus aut autem",
-    "completed": false
+    "completed": false,
+    "visible": false
   },
   {
     "id": 2,
     "text": "quis ut nam facilis et officia qui",
-    "completed": false
+    "completed": false,
+    "visible": false
   },
   {
     "id": 3,
     "text": "fugiat veniam minus",
-    "completed": true
+    "completed": true,
+    "visible": false
   }
 ]

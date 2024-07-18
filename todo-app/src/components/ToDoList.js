@@ -19,6 +19,12 @@ export default function ToDoList({ tasks, dispatch }) {
         setEditingTaskId(null); //removes the edit mode after saving
     };
 
+    const handleDelete = (task) => {
+        dispatch({
+            type: 'DELETE_TODO', taskId: task.id
+        })
+    };
+
     return (
         <>
             {tasks.map(task =>
@@ -63,10 +69,7 @@ export default function ToDoList({ tasks, dispatch }) {
                     {/* delete button */}
 
                     <button style={{ marginLeft: 8 }}
-                        onClick={() =>
-                            dispatch({
-                                type: 'DELETE_TODO', taskId: task.id
-                            })
+                        onClick={() => handleDelete(task)
                         }>
                         Delete
                     </button>
